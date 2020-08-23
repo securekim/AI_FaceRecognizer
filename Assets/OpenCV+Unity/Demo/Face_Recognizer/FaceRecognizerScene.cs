@@ -7,7 +7,7 @@
 	using OpenCvSharp.Face;
 	using UnityEngine;
 
-	public class FaceRecognizerScene : UnityEngine.MonoBehaviour
+	public class FaceRecognizerScene : WebCamera
 	{
 		public UnityEngine.Texture2D sample;
 		public UnityEngine.TextAsset faces;
@@ -76,11 +76,17 @@
 		}
 		#endregion
 
+
 		/// <summary>
 		/// Initializes scene
 		/// </summary>
-		protected virtual void Awake()
+		protected override void Awake()
 		{
+			Debug.Log("AWAKE");
+
+			base.Awake();
+			this.forceFrontalCamera = true;
+
 			// classifier
 			FileStorage storageFaces = new FileStorage(faces.text, FileStorage.Mode.Read | FileStorage.Mode.Memory);
 			cascadeFaces = new CascadeClassifier();
@@ -102,7 +108,7 @@
 
 			// label names
 			//names = new string[] { "Cooper", "DeGeneres", "Nyongo", "Pitt", "Roberts", "Spacey"	};
-			names = new string[] { "AJH", "KBY", "LSJ", "OSR", "B", "C", "D" };
+			names = new string[] { "AJH", "KBY", "LYJ", "OSR", "B", "C", "D" };
 		}
 
 		/// <summary>
@@ -110,12 +116,22 @@
 		/// </summary>
 		void Start()
 		{
+			Debug.Log("START");
 			//TODO : DELETE
 			//TrainRecognizer("D:/projects/vr_exam_attendance/Assets/OpenCV+Unity/Demo/Face_Recognizer/face_recog_train");
+		}
+
+		protected override bool ProcessTexture(WebCamTexture input, ref Texture2D output)
+		{
+
+			Debug.Log("Process Texture");
+
+			// convert webcam texture to mat
+			Mat image = Unity.TextureToMat(input, TextureParameters);
 
 			// convert texture to cv image
-			Mat image = Unity.TextureToMat(this.sample);
-			
+			//Mat image = Unity.TextureToMat(this.sample);
+
 			// Detect faces
 			var gray = image.CvtColor(ColorConversionCodes.BGR2GRAY);
 			Cv2.EqualizeHist(gray, gray);
@@ -167,10 +183,12 @@
 
 			var transform = gameObject.GetComponent<UnityEngine.RectTransform>();
 			transform.sizeDelta = new UnityEngine.Vector2(image.Width, image.Height);
-		}
 
-		// Update is called once per frame
-		void Update()
-		{}
+
+			// result, passing output texture as parameter allows to re-use it's buffer
+			// should output texture be null a new texture will be created
+			output = Unity.MatToTexture(mat: image, output);
+			return true;
+		}
 	}
 }

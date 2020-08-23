@@ -4,9 +4,10 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - Surface: {instanceID: 0}
   - sample: {instanceID: 0}
   - faces: {instanceID: 0}
-  - recognizerXml: {fileID: 4900000, guid: aac0ea5b07063574088c0c95ae97833d, type: 3}
+  - recognizerXml: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
