@@ -457,7 +457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sample: {fileID: 2800000, guid: 549ceca7a13155649ac4636542f65cdb, type: 3}
   faces: {fileID: 4900000, guid: 6b25a0e0227666d40b282be78b80780c, type: 3}
-  recognizerXml: {fileID: 4900000, guid: aac0ea5b07063574088c0c95ae97833d, type: 3}
+  recognizerXml: {fileID: 4900000, guid: ef2bb766aa490ad43b247b85fe19941e, type: 3}
 --- !u!114 &1686030363
 MonoBehaviour:
   m_ObjectHideFlags: 0

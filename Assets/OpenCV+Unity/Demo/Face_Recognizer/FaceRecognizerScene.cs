@@ -101,8 +101,8 @@
 			recognizer.Load(new FileStorage(recognizerXml.text, FileStorage.Mode.Read | FileStorage.Mode.Memory));
 
 			// label names
-			names = new string[] { "Cooper", "DeGeneres", "Nyongo", "Pitt", "Roberts", "Spacey"	};
-			//names = new string[] { "securekim" };
+			//names = new string[] { "Cooper", "DeGeneres", "Nyongo", "Pitt", "Roberts", "Spacey"	};
+			names = new string[] { "AJH", "KBY", "LSJ", "OSR", "B", "C", "D" };
 		}
 
 		/// <summary>
@@ -111,7 +111,7 @@
 		void Start()
 		{
 			//TODO : DELETE
-			TrainRecognizer("D:/projects/vr_exam_attendance/Assets/OpenCV+Unity/Demo/Face_Recognizer/face_recog_train");
+			//TrainRecognizer("D:/projects/vr_exam_attendance/Assets/OpenCV+Unity/Demo/Face_Recognizer/face_recog_train");
 
 			// convert texture to cv image
 			Mat image = Unity.TextureToMat(this.sample);
